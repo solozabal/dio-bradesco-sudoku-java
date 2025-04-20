@@ -10,7 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (!board.isComplete()) {
-            System.out.println("\n🧩 Jogo Sudoku Atual:");
+            System.out.println("\n🧩 Jogo Sudoku:");
             board.printBoard();
 
             System.out.println("\n📌 Digite sua jogada no formato: linha coluna valor (ex: 0 1 5)");

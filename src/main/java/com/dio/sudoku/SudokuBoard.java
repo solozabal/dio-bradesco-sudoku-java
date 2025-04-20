@@ -98,5 +98,14 @@ public class SudokuBoard {
         if (board[y][x].isFixed()) return false;
         return getValidationError(x, y, value) == null;
     }
+    
+    public int getCellValue(int x, int y) {
+        return board[y][x].getValue();
+    }
+
+    public Cell getCell(int x, int y) {
+        return board[y][x];
+    }
+
 
 }

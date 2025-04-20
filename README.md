@@ -1,30 +1,34 @@
-# Sudoku Console Game
+# Sudoku Console & GUI Game
 
-Este projeto implementa um jogo de Sudoku jogável pelo terminal, utilizando Java. A estrutura do código é orientada a objetos, com funcionalidades de validação de jogadas, verificação de conclusão do jogo e testes automatizados com JUnit 5.
+Este projeto implementa um jogo de Sudoku com duas interfaces: jogável pelo terminal e com uma interface gráfica (GUI) em Java. A estrutura do código segue os princípios de Programação Orientada a Objetos (POO) e inclui testes automatizados com JUnit 5.
 
 ## 🚀 Tecnologias Utilizadas
-![Java](https://img.shields.io/badge/Java-17%2B-blue)
+![Java](https://img.shields.io/badge/Java-21%2B-blue)
 ![JUnit](https://img.shields.io/badge/JUnit-5-orange)
 ![Eclipse](https://img.shields.io/badge/IDE-Eclipse-darkblue)
 
-- Java 17 ou superior
+- Java 21 ou superior
 - JUnit 5 para testes unitários
+- Swing para a interface gráfica
 - Eclipse IDE (ou qualquer IDE de sua preferência)
 
 ## 📂 Estrutura do Projeto
 
 ```
 com.dio.sudoku
-├── Main.java              # Classe principal com loop do jogo
-├── SudokuBoard.java       # Representa o tabuleiro e contém a lógica do jogo
+├── Main.java              # Classe principal que inicia o jogo
+├── StartMenu.java         # Menu inicial com opção para escolher entre terminal e GUI
+├── SudokuGUI.java         # Interface gráfica do jogo (Swing)
+├── SudokuBoard.java       # Lógica do jogo e manipulação do tabuleiro
 ├── Cell.java              # Representa uma célula do Sudoku
 └── SudokuBoardTest.java   # Classe de testes automatizados (JUnit)
+
 ```
 
 ## 🧠 Funcionalidades
 - 🎲 **Inicialização de tabuleiro** com valores embaralhados
-- 🖥️ **Exibição do tabuleiro** com estrutura visual em ASCII
-- 🎮 **Jogabilidade via terminal**
+- 🖥️ **Exibição do tabuleiro** com estrutura visual em ASCII ou GUI
+- 🎮 **Jogabilidade via terminal ou interface gráfica**
 - ✅ **Validações de jogadas**:
   - 🚫 Células fixas não podem ser alteradas
   - 🔢 Não é permitido repetir valores na mesma linha, coluna ou bloco 3x3
@@ -34,16 +38,18 @@ com.dio.sudoku
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/seuusuario/sudoku-terminal-game.git
+   git clone https://github.com/solozabal/dio-bradesco-sudoku
    ```
 
 2. **Abra o projeto no Eclipse IDE:**
    - Vá em `File > Open Projects from File System...`
    - Selecione o diretório do projeto clonado
 
-3. **Execute o `Main.java`:**
-   - Clique com o botão direito em `Main.java`
+3. **Execute o `StartMenu.java`:**
+   - Clique com o botão direito em `StartMenu.java`
    - Escolha `Run As > Java Application`
+   
+⚠️ Importante: a classe Main.java é utilizada apenas para a execução direta via terminal. Recomendamos iniciar o jogo sempre por StartMenu.java para acessar ambas as opções de interface.
 
 ## ✅ Executando os Testes
 1. Certifique-se de que o JUnit 5 está no classpath do projeto.
@@ -60,8 +66,9 @@ Isso tentará inserir o número 4 na linha 0, coluna 1.
 
 ## 🧱 To-Do / Melhorias Futuras
 - Gerador dinâmico de tabuleiros válidos
-- Interface gráfica (GUI)
-- Sistema de pontuação ou tempo
+- Sistema de pontuação ou cronômetro
+- Tela de vitória/derrota para GUI
+- Melhorias visuais na interface gráfica
 
 ---
 
