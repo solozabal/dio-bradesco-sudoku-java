@@ -19,13 +19,15 @@ A 100% Java Sudoku game that can be played in the terminal or with a graphical i
 
 ## 📊 Architecture Diagram
 
+Application execution starts with `StartMenu`, giving the user a choice: run in the terminal (`Main`) or with GUI (`SudokuGUI`). Both modes rely on `SudokuBoard` for all game logic and state, which in turn manages the individual `Cell` instances.
+
 ```mermaid
 flowchart TD
-    StartMenu["StartMenu.java\n(Start Menu)"]
-    Main["Main.java\n(Terminal Mode)"]
-    SudokuGUI["SudokuGUI.java\n(GUI Mode)"]
-    Board["SudokuBoard.java\n(Game Logic)"]
-    Cell["Cell.java\n(Board Cell)"]
+    StartMenu["StartMenu.java<br/>(Start Menu)"]
+    Main["Main.java<br/>(Terminal Mode)"]
+    SudokuGUI["SudokuGUI.java<br/>(GUI Mode)"]
+    Board["SudokuBoard.java<br/>(Game Logic)"]
+    Cell["Cell.java<br/>(Board Cell)"]
 
     StartMenu --> Main
     StartMenu --> SudokuGUI
@@ -33,37 +35,38 @@ flowchart TD
     SudokuGUI --> Board
     Board --> Cell
 ```
-*Application execution starts with StartMenu, giving the user a choice: run in the terminal (Main) or with GUI (SudokuGUI). Both modes rely on SudokuBoard for all game logic and state, which in turn manages the individual Cell instances.*
 
 ---
 
 ## 📝 UML Diagram
 
+UML overview: shows relationships and main methods among the core classes—`StartMenu` or `Main` start the game, `SudokuBoard` manages logic, `SudokuGUI` is the graphical view, and `Cell` represents board units. Unit tests validate game logic.
+
 ```mermaid
 classDiagram
     class Main {
-        +main(String[] args)
+        +main(args: String[]): void
     }
     class StartMenu {
-        +main(String[] args)
+        +main(args: String[]): void
     }
     class SudokuGUI {
-        -SudokuBoard board
-        +SudokuGUI()
+        - SudokuBoard board
+        + SudokuGUI()
     }
     class SudokuBoard {
-        -Cell[][] board
-        +isValidMove(int, int, int)
-        +isComplete()
-        +display()
+        - Cell[][] board
+        + isValidMove(row: int, col: int, value: int): boolean
+        + isComplete(): boolean
+        + display(): void
     }
     class Cell {
-        +int value
-        +boolean fixed
+        + value: int
+        + fixed: boolean
     }
     class SudokuBoardTest {
-        +testIsValidMove()
-        +testIsComplete()
+        + testIsValidMove(): void
+        + testIsComplete(): void
     }
 
     Main --> SudokuBoard
@@ -73,7 +76,7 @@ classDiagram
     SudokuBoard --> Cell
     SudokuBoardTest --> SudokuBoard
 ```
-*UML diagram showing the relationship and main methods/fields of the key classes. The system is centered around a board class (SudokuBoard) which manages an array of cells and is manipulated through either a console (Main) or GUI interface (SudokuGUI). Unit tests validate the core logic.*
+
 ---
 
 ## 🌟 Features
@@ -88,9 +91,6 @@ classDiagram
 
 ---
 
-## 📁 Project Structure
-
-```text
 ## 📁 Project Structure
 
 ```text
@@ -179,11 +179,11 @@ public class SudokuBoard {
 
 ```java
 while (!board.isComplete()) {
-    board.display();
+        board.display();
     System.out.print("Enter move: ");
-    // Parse move, validate, update board
+// Parse move, validate, update board
 }
-System.out.println("Congratulations, you solved the puzzle!");
+        System.out.println("Congratulations, you solved the puzzle!");
 ```
 
 ### 3. Launching the GUI
