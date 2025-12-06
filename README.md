@@ -1,76 +1,240 @@
-# Sudoku Console & GUI Game
+# 🧩 Sudoku Console & GUI Game
 
-Este projeto implementa um jogo de Sudoku com duas interfaces: jogável pelo terminal e com uma interface gráfica (GUI) em Java. A estrutura do código segue os princípios de Programação Orientada a Objetos (POO) e inclui testes automatizados com JUnit 5.
+[![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://www.oracle.com/java/)
+[![JUnit](https://img.shields.io/badge/JUnit-5.10.0-orange.svg)](https://junit.org/junit5/)
+[![Maven](https://img.shields.io/badge/Maven-Build-orange.svg)](https://maven.apache.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 🚀 Tecnologias Utilizadas
-![Java](https://img.shields.io/badge/Java-21%2B-blue)
-![JUnit](https://img.shields.io/badge/JUnit-5-orange)
-![Eclipse](https://img.shields.io/badge/IDE-Eclipse-darkblue)
-
-- Java 21 ou superior
-- JUnit 5 para testes unitários
-- Swing para a interface gráfica
-- Eclipse IDE (ou qualquer IDE de sua preferência)
-
-## 📂 Estrutura do Projeto
-
-```
-com.dio.sudoku
-├── Main.java              # Classe principal que inicia o jogo
-├── StartMenu.java         # Menu inicial com opção para escolher entre terminal e GUI
-├── SudokuGUI.java         # Interface gráfica do jogo (Swing)
-├── SudokuBoard.java       # Lógica do jogo e manipulação do tabuleiro
-├── Cell.java              # Representa uma célula do Sudoku
-└── SudokuBoardTest.java   # Classe de testes automatizados (JUnit)
-
-```
-
-## 🧠 Funcionalidades
-- 🎲 **Inicialização de tabuleiro** com valores embaralhados
-- 🖥️ **Exibição do tabuleiro** com estrutura visual em ASCII ou GUI
-- 🎮 **Jogabilidade via terminal ou interface gráfica**
-- ✅ **Validações de jogadas**:
-  - 🚫 Células fixas não podem ser alteradas
-  - 🔢 Não é permitido repetir valores na mesma linha, coluna ou bloco 3x3
-- 🏁 **Verificação automática** se o jogo está completo
-
-## ▶️ Como Executar
-
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/solozabal/dio-bradesco-sudoku
-   ```
-
-2. **Abra o projeto no Eclipse IDE:**
-   - Vá em `File > Open Projects from File System...`
-   - Selecione o diretório do projeto clonado
-
-3. **Execute o `StartMenu.java`:**
-   - Clique com o botão direito em `StartMenu.java`
-   - Escolha `Run As > Java Application`
-   
-⚠️ Importante: a classe Main.java é utilizada apenas para a execução direta via terminal. Recomendamos iniciar o jogo sempre por StartMenu.java para acessar ambas as opções de interface.
-
-## ✅ Executando os Testes
-1. Certifique-se de que o JUnit 5 está no classpath do projeto.
-2. Clique com o botão direito no arquivo `SudokuBoardTest.java`
-3. Selecione `Run As > JUnit Test`
-
-## 📌 Exemplo de Jogada
-No terminal:
-```
-📌 Digite sua jogada no formato: linha coluna valor (ex: 0 1 5)
-➤ Sua jogada: 0 1 4
-```
-Isso tentará inserir o número 4 na linha 0, coluna 1.
-
-## 🧱 To-Do / Melhorias Futuras
-- Gerador dinâmico de tabuleiros válidos
-- Sistema de pontuação ou cronômetro
-- Tela de vitória/derrota para GUI
-- Melhorias visuais na interface gráfica
+A 100% Java Sudoku game that can be played in the terminal or with a graphical interface (Swing GUI). Biggest focus: OOP, clean code, and two execution experiences!
 
 ---
 
-Feito com 💻 por Pedro Solozabal.
+## 🖥️ GUI Screenshot
 
+<p align="center">
+  <img src="assets/sudoku-gui.png" alt="Sudoku GUI Example" width="450">
+</p>
+
+---
+
+## 📊 Architecture Diagram
+
+```mermaid
+flowchart TD
+    StartMenu["StartMenu.java\n(Start Menu)"]
+    Main["Main.java\n(Terminal Mode)"]
+    SudokuGUI["SudokuGUI.java\n(GUI Mode)"]
+    Board["SudokuBoard.java\n(Game Logic)"]
+    Cell["Cell.java\n(Board Cell)"]
+
+    StartMenu --> Main
+    StartMenu --> SudokuGUI
+    Main --> Board
+    SudokuGUI --> Board
+    Board --> Cell
+```
+*Application execution starts with StartMenu, giving the user a choice: run in the terminal (Main) or with GUI (SudokuGUI). Both modes rely on SudokuBoard for all game logic and state, which in turn manages the individual Cell instances.*
+
+---
+
+## 📝 UML Diagram
+
+```mermaid
+classDiagram
+    class Main {
+        +main(String[] args)
+    }
+    class StartMenu {
+        +main(String[] args)
+    }
+    class SudokuGUI {
+        -SudokuBoard board
+        +SudokuGUI()
+    }
+    class SudokuBoard {
+        -Cell[][] board
+        +isValidMove(int, int, int)
+        +isComplete()
+        +display()
+    }
+    class Cell {
+        +int value
+        +boolean fixed
+    }
+    class SudokuBoardTest {
+        +testIsValidMove()
+        +testIsComplete()
+    }
+
+    Main --> SudokuBoard
+    StartMenu --> Main
+    StartMenu --> SudokuGUI
+    SudokuGUI --> SudokuBoard
+    SudokuBoard --> Cell
+    SudokuBoardTest --> SudokuBoard
+```
+*UML diagram showing the relationship and main methods/fields of the key classes. The system is centered around a board class (SudokuBoard) which manages an array of cells and is manipulated through either a console (Main) or GUI interface (SudokuGUI). Unit tests validate the core logic.*
+---
+
+## 🌟 Features
+
+- 🎲 Board initialization with random preset values
+- 🖥️ Playable by **terminal (console)** or **modern Swing GUI**
+- 😎 OOP and clean architecture, easy to extend for new features
+- ✅ Move validation: no altering fixed cells, no number repetition on row, column, or 3x3 block
+- 🏁 Automatic game-completion verification
+- 🧪 Automated tests (JUnit 5)
+- 📝 Simple, readable code structure
+
+---
+
+## 📁 Project Structure
+
+```text
+## 📁 Project Structure
+
+```text
+src
+├── main
+│   └── java
+│       └── com.dio.sudoku
+│           ├── Cell.java           # Board cell: value, fixed/variable
+│           ├── Main.java           # Terminal mode entry point
+│           ├── StartMenu.java      # Menu for choosing Console or GUI
+│           ├── SudokuBoard.java    # Core board logic and validation
+│           └── SudokuGUI.java      # Graphical interface (Swing)
+├── test
+│   └── java
+│       └── com.dio.sudoku
+│           └── SudokuBoardTest.java  # Unit tests (JUnit)
+assets/
+└── sudoku-gui.png                   # Screenshot of GUI
+```
+
+---
+
+## 🚀 Getting Started
+
+**Prerequisites**
+- Java 17 or newer
+- Maven 3.8+
+- Any IDE (Eclipse, IntelliJ, VS Code) or terminal
+
+**Clone the repo**
+```sh
+git clone https://github.com/solozabal/dio-bradesco-sudoku-java.git
+cd dio-bradesco-sudoku-java
+```
+
+### ▶️ Run in Terminal (console mode)
+
+Compile and run directly:
+```sh
+mvn compile
+java -cp target/classes com.dio.sudoku.Main
+```
+
+Or, in your IDE, right-click `Main.java` and **Run** as Java app.
+
+### 🖼️ Run Graphical Interface (Swing GUI)
+
+```sh
+mvn compile
+java -cp target/classes com.dio.sudoku.SudokuGUI
+```
+Or, in IDE: right-click `SudokuGUI.java` and **Run**.
+
+### 🏁 Universal Start (menu for both modes)
+```sh
+java -cp target/classes com.dio.sudoku.StartMenu
+```
+
+---
+
+## ⌨️ Command Example (Terminal)
+
+When playing in the console, you’ll be prompted:
+```sh
+Enter your move as: row col value (e.g. 0 1 5)
+> 0 1 4
+```
+This attempts to set 4 in row 0, column 1.
+
+---
+
+## 🏆 Code Highlights
+
+### 1. Game Board & Validation
+```java
+public class SudokuBoard {
+    private Cell[][] board;
+    //...
+    public boolean isValidMove(int row, int col, int value) {
+        // Check row, column, block, and if cell is fixed
+    }
+}
+```
+
+### 2. Console Play Loop
+
+```java
+while (!board.isComplete()) {
+    board.display();
+    System.out.print("Enter move: ");
+    // Parse move, validate, update board
+}
+System.out.println("Congratulations, you solved the puzzle!");
+```
+
+### 3. Launching the GUI
+
+```java
+public class SudokuGUI extends JFrame {
+    public SudokuGUI() {
+        // Setup window, create 9x9 grid, bind actions to cells/buttons
+    }
+}
+```
+
+### 4. Automated Tests
+
+```java
+@Test
+void testIsValidMove() {
+    SudokuBoard board = new SudokuBoard();
+    assertTrue(board.isValidMove(0, 0, 5));
+    assertFalse(board.isValidMove(0, 0, 3)); // If already occupied, etc
+}
+```
+
+---
+
+## 🧪 Testing
+
+- Tests are in `SudokuBoardTest.java`
+- Run with your IDE (right-click: **Run as JUnit Test**) or via terminal:
+
+```sh
+mvn test
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are always welcome!  
+Feel free to fork, open issues, or submit pull requests.
+
+---
+
+## 📄 License
+
+Licensed under the [MIT License](LICENSE).
+
+---
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/pedrosolozabal/">
+    <img src="https://img.shields.io/badge/Pedro%20Solozabal-LinkedIn-blue?logo=linkedin&logoColor=white&style=for-the-badge" alt="Pedro Solozabal on LinkedIn">
+  </a>
+</p>
